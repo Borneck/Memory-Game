@@ -1,3 +1,44 @@
+// Navigation mit reinem JavaScript
+
+( function() {
+    
+//Klasse zu html hinzufügen (kennzeichnet JavaScript aktiviert)
+document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+function naviklapp(navid) {
+//Navigationselement, Button, Menü
+var nav = document.getElementById( navid );
+var button;
+var menu;
+//ohne navigation
+if ( ! nav )
+return;
+//der Button ist das erste h3-Element innerhalb der Navigation
+button = nav.getElementsByTagName("h4")[0];
+
+// die erste ungeordnete Liste in der Navigation ist das Menü
+menu = nav.getElementsByTagName("ul")[0];
+if ( ! button )
+return;
+
+if ( ! menu || ! menu.childNodes.length ) {
+button.style.display = "none";
+return;
+}
+button.onclick = function() {
+
+if ( -1 != button.className.indexOf("toggled_on") ) {
+button.className = button.className.replace("toggled_on", "");
+menu.className = menu.className.replace("toggled_on", "");
+} else {
+button.className += "toggled_on";
+menu.className += "toggled_on";
+}
+};
+}
+naviklapp("navi");
+
+} )();; 
+
 /*
  * Create a list that holds all of your cards
  */

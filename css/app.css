@@ -76,6 +76,48 @@ h1, h2 {
     display: flex;
 }
 
+                    /*----- Styling Navigation -----
+                    --------------------------------*/
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+#navi li {
+    -webkit-box-shadow: 0 5px 5px rgba(245, 245, 245, 0.75) inset;
+    box-shadow: 0 5px 5px rgba(245, 245, 245, 0.75) inset;
+  }
+.menu_ueber {
+    font-size: 1.2em;
+}
+
+#navi {
+    padding: 1px;
+}
+
+#navi li {
+	list-style: none;
+    background-color: #43373F;
+}
+
+#navi a{
+    text-decoration: none;
+    display:flex;
+    justify-content: center;
+    padding: 1.5em 15% 0.75em;
+    color: #fff;  
+}
+
+#navi  a:hover{
+    color:#CE6634;
+}
+
+                    /*----- Hamburger Buttons normalerweise ausblenden -----*/
+
+.toggle_menu {
+    display: none;
+}
+
 
 /*
  * Styles for the deck of cards
@@ -150,4 +192,114 @@ h1, h2 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+                  /*----- Styling Sozial Media footerbereich -----
+                    ------------------------------------------------*/
+
+.screen_reader_text {
+    clip: rect(px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.social_menu ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.social_menu ul li {
+    list-style: none;
+    padding: 0 0.2rem;
+}
+
+.social_menu a{
+    text-decoration: none;
+    color: #02ccba;
+}
+
+.menu a{
+    font-size: 25px;
+    padding: 18px;
+}
+
+/*------ sozial Media Icons -----*/
+
+.social_menu li a:before {
+    font-family: "fontawesome";
+    -webkit-font-smoothing: antialiased;
+    content: '\fe08e'
+}
+
+.social_menu li a[href*="linkedin.com"]::before {
+    content: '\f0e1';
+}
+
+.social_menu li a[href*="github.com"]::before {
+    content: '\f09b';
+}
+
+.social_menu li a[href*="mailto"]::before {
+    content: '\f0e0';
+}
+
+
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (max-width: 479px) {
+    
+                    /*----- Navigatinbereich -----*/
+                    /*----- Button zum Anzeigen des Menü -----*/
+
+    .js .toggle_menu {
+        display: block;
+        cursor: pointer;
+        color: #fff;
+        border-radius: 50%;
+        background-color: #645360;
+        width: 2.5em;
+        height: 2.5em;
+        margin: 10px auto;
+        text-align: center;
+        line-height: 2.5em;
+        border: 1px solid #010101;
+        font-weight: normal;
+        
+      }
+
+    .js  #navi ul {
+        display: none;
+      }
+
+    #navi ul.toggled_on {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 50%;
+      }
+
+    #navi ul.toggled_on li,  .no-js  #navi  li { 
+        display: block;
+      }
+    
+    [data-hamburger]:before { 
+        content: attr(data-hamburger); 
+        speak: none; 
+        display: inline-block;
+        font-size: 200%;
+      }
+    
+    .screen_reader_text { 
+        position: absolute; 
+        top: -9999px; 
+        left: -9999px; 
+      }
 }
