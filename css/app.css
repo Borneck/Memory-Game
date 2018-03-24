@@ -24,6 +24,10 @@ body {
     font-family: 'Coda', cursive;
 }
 
+h1, h2 {
+    font-family: 'Maiandra Gd ', serif;
+}
+
 .container {
     display: flex;
     justify-content: center;
