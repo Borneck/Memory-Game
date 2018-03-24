@@ -26,6 +26,7 @@ body {
 
 h1, h2 {
     font-family: 'Maiandra Gd ', serif;
+    font-weight: bold;
 }
 
 .container {
@@ -35,10 +36,7 @@ h1, h2 {
     flex-direction: column;
 }
 
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-}
+
 
 /*
  * Styles for the deck of cards
