@@ -36,6 +36,45 @@ h1, h2 {
     flex-direction: column;
 }
 
+                    /*----- Styling Kopfberreich -----
+                    ----------------------------------*/
+.header-section {
+    width: 100%;
+    display: flex;
+}
+
+.heading {
+    flex: 1 0 60%;
+    text-align: center;
+    order: 1;
+}
+
+.heading h1 {
+    margin: 15px 0 5px; 
+}
+
+.heading p {
+    margin: 0 0 15px;
+}
+
+.navigation {
+    flex: 1 0 15%;
+    order: 0;
+}
+
+.player-choose {
+    flex: 1 0 15%;
+    order: 1;
+    height: 100%;
+}
+
+.player-choose p {
+    margin: 5px 0;
+}
+
+.player-choose lable {
+    display: flex;
+}
 
 
 /*
