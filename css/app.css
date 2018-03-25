@@ -118,6 +118,7 @@ body {
 body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
+    font-size: 80%;
 }
 
 h1, h2 {
@@ -456,9 +457,7 @@ i.fa-repeat {
 
 @media only screen and (max-width: 479px) {
     
-                    /*----- Navigatinbereich -----*/
-                    /*----- Button zum Anzeigen des Menü -----*/
-
+  
     .js .toggle_menu {
         display: block;
         cursor: pointer;
@@ -517,6 +516,34 @@ i.fa-repeat {
 }
 
 @media only screen and (min-width: 480px) {
+    
+    body {
+        font-size: 100%;
+    }
+    
+                        /*----- Kopfberreich Styling -----*/
+    .header-section {
+        flex-wrap: wrap;
+    }
+    
+    .player-choose {
+        flex: 1 0 0%;
+    }
+    
+                    /*----- Navigatinbereich -----*/
+                    /*----- Button zum Anzeigen des Menü -----*/
+    .navigation {
+        flex: 1 0 100%;
+    }
+ 
+    .navigation ul {
+        display: flex;
+        flex: 1 0 0%;
+    }
+     .navigation li {
+        flex: 1 0 0%;
+    }
+    
                         /*----- Spielfeld -----
                         ----------------------*/
     .deck {
@@ -533,6 +560,9 @@ i.fa-repeat {
 }
 
 @media only screen and (min-width: 660px) {
+    body {
+        font-size: 120%;
+    }
                         /*----- Spielfeld -----
                         ----------------------*/
     .deck {
