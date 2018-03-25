@@ -119,6 +119,8 @@ body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
     font-size: 80%;
+    max-width: 1280px;
+    margin: auto;
 }
 
 h1, h2 {
