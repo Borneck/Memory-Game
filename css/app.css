@@ -220,6 +220,40 @@ ul, li {
     width: 100%;
 }
 
+                    /*----- Styling Spieler Berreich -----
+                    --------------------------------------*/
+.player-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+                   /*----- Styling punkte -----
+                    -------------------------*/
+
+.score-panel {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+
                     /*----- Styling der Deckkarten -----
                      ----------------------------------*/
 
@@ -265,32 +299,6 @@ ul, li {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
-}
-
-                /*----- Styling punkte -----
-                 -------------------------*/
-
-.score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
-}
-
-.score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
-}
-
-.score-panel .stars li {
-    list-style: none;
-    display: inline-block;
-}
-
-.score-panel .restart {
-    float: right;
-    cursor: pointer;
 }
 
                   /*----- Styling Sozial Media footerbereich -----
