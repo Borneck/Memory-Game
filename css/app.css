@@ -220,6 +220,16 @@ ul, li {
     width: 100%;
 }
 
+                    /*----- Neustart Button -----
+                    ----------------------------*/
+.restart {
+    display: flex;
+    justify-content: center;
+}
+i.fa-repeat {
+    font-size: 1.5em;
+}
+
                     /*----- Styling Spieler Berreich -----
                     --------------------------------------*/
 .player-section {
