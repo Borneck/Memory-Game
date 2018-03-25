@@ -247,6 +247,8 @@ i.fa-repeat {
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;
+    max-width: 990px;
+    margin: auto;
 }
 
                    /*----- Styling punkte -----
