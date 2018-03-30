@@ -49,6 +49,7 @@ naviklapp('navi');
 const deck =document.querySelector('.deck');
 const card = document.querySelectorAll('.card');
 const decke = document.querySelector('#play-deck');
+const restart = document.querySelector('.restart');
                         /****** Klassen namen in Array Speichern ******/
 let cards = [...card];
 let cardOneTwo = [];
@@ -89,6 +90,8 @@ function cardsOpen(cards){
 function startGame(){
     cardsShuffle();
     cardsRemove();
+    gameReset();
+    
 };
                         /****** Funktion um Karten neu zu Mischen ******/ 
 function cardsShuffle(){
@@ -152,9 +155,17 @@ function checkCards(){
         }; 
     };
 };
+                     /****** Funktion um das Spiele Neu zu starten ******/
+function gameReset(){
+    restart.addEventListener('click',function(){        
+            restart.classList.remove("show");
+        startGame();        
+    });
+};
 
 /*************************************** Ende Memory Spiel*******************************************************/
-                   
+                        
+   
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
