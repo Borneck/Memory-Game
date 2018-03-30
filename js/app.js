@@ -1,57 +1,66 @@
-// Navigation mit reinem JavaScript
+"use strict";
+                        /****** Navigation mit Hamburger Menü ******
+                        *******************************************/
 
 ( function() {
     
-//Klasse zu html hinzufügen (kennzeichnet JavaScript aktiviert)
+                        /******* Klasse zu html hinzufügen JavaScript aktiviert ******/
 document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
 function naviklapp(navid) {
-//Navigationselement, Button, Menü
+                        /****** Navigationselemente, Button, Menü ******/
 var nav = document.getElementById( navid );
 var button;
 var menu;
-//ohne navigation
+                        /****** navigation aus ******/
 if ( ! nav )
-return;
-//der Button ist das erste h3-Element innerhalb der Navigation
-button = nav.getElementsByTagName("h4")[0];
+    return;
+                        /****** erster Button des h3-Element innerhalb der Navigation ******/
+button = nav.getElementsByTagName('h4')[0];
 
-// die erste ungeordnete Liste in der Navigation ist das Menü
-menu = nav.getElementsByTagName("ul")[0];
-if ( ! button )
-return;
+                        /****** die erste ungeordnete Liste in der Navigation ist das Menü *******/
+menu = nav.getElementsByTagName('ul')[0];
+    if ( ! button )
+    return;
 
 if ( ! menu || ! menu.childNodes.length ) {
-button.style.display = "none";
-return;
+    button.style.display = 'none';
+    return;
 }
 button.onclick = function() {
 
-if ( -1 != button.className.indexOf("toggled_on") ) {
-button.className = button.className.replace("toggled_on", "");
-menu.className = menu.className.replace("toggled_on", "");
-} else {
-button.className += "toggled_on";
-menu.className += "toggled_on";
-}
+    if ( -1 != button.className.indexOf('toggled_on') ) {
+        button.className = button.className.replace('toggled_on', '');
+        menu.className = menu.className.replace('toggled_on', '');
+    } else {
+        button.className += 'toggled_on';
+        menu.className += 'toggled_on';
+    }
 };
 }
-naviklapp("navi");
+naviklapp('navi');
 
-} )();; 
+} )();;
+/***************************************** Ende der Navigation *****************************************************/
 
-/*
- * Create a list that holds all of your cards
- */
+                        /****** Mermory Spiel ******
+                        ****************************/
 
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
+                        /****** Speichern der klassen in Variabeln ******/
+const deck =document.querySelector('.deck');
+const card = document.querySelectorAll('.card');
+const decke = document.querySelector('#play-deck');
+                        /****** Klassen namen in Array Speichern ******/
+let cards = [...card];
+let cardOneTwo = [];
+let cardArray = [];
+                        /****** Variabeln für Speicherplatz ******/
+let cardOne;
+let cardTwo;
+let cardList;
+                        /****** Spiel Starten ******/
+document.body.onload = startGame();
+                        /****** Spielkarten neu Mischen ******/
+                        /***** Shuffle function from http://stackoverflow.com/a/2450976 ******/
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -67,6 +76,85 @@ function shuffle(array) {
 }
 
 
+                        /****** Schleife um die Node Liste zu durchlaufen ******/
+card.forEach(cardsOpen);
+                        /****** Event Listener um Spielkarten zu Öffnen und schließen ******/
+function cardsOpen(cards){
+    cards.addEventListener('click', cardDisplay, false)
+};
+
+                        /****** Funktionen für das Memory Spiel ******/
+
+                        /****** Funktion wenn neues Spiel startet ******/
+function startGame(){
+    cardsShuffle();
+    cardsRemove();
+};
+                        /****** Funktion um Karten neu zu Mischen ******/ 
+function cardsShuffle(){
+    cards = shuffle(cards);
+};
+                        /****** Funktion um Klassen bei Start zu löschen *****/
+function cardsRemove() {
+    for (var i = 0; i < cards.length; i++){
+        deck.innerHTML = '';
+        [].forEach.call(cards, function(item) {
+            decke.appendChild(item);
+        });
+        cards[i].classList.remove('show', 'open', 'match', 'no-event');
+    };
+};
+                        /****** Funktion zu Anzeigen der Spielkarten ******/
+function cardDisplay(){
+    cardList = this.classList;
+    cardOneTwo.push(this.children[0].classList[1]);
+    cardArray.push(this);
+      
+    openCards()                                     
+    twoCardsOpen();
+    checkCards();
+    
+    return cardList;
+};
+                        /****** Funktion um Spiel Karten zu öffnen ******/
+function openCards(){
+    cardList.toggle('open');
+    cardList.toggle('show');
+    cardList.toggle('no-event'); 
+};
+                        /****** Funktion um zwei Spielkarten zu öffnen ******/
+function twoCardsOpen(){
+    if(cardArray.length <= 2) {}
+    else {
+        cardList.remove('open', 'show', 'no-event')
+    };
+};
+                        /****** Funktion um zwei Spielkarten zu Überprüfen ob richtig ******/
+function checkCards(){
+    cardOne = cardOneTwo[0];
+    cardTwo = cardOneTwo[1];
+        
+    if (cardOne === undefined ||  cardTwo === undefined ){} 
+    else if (cardOne === cardTwo ) {
+        cardArray[0].classList.add('match', 'no-event');
+        cardArray[1].classList.add('match', 'no-event');
+        cardOneTwo=[];
+        cardArray= [];
+    }
+    else {
+        if(cardArray.length === 2){
+            setTimeout(function(){
+                cardArray[0].classList.remove('open', 'show', 'no-event');
+                cardArray[1].classList.remove('open', 'show', 'no-event');
+                cardOneTwo= [];
+                cardArray=[];
+            }, 1500); 
+        }; 
+    };
+};
+
+/*************************************** Ende Memory Spiel*******************************************************/
+                   
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

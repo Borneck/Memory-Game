@@ -323,6 +323,10 @@ i.fa-repeat {
     background: #02ccba;
     font-size: 33px;
 }
+.deck .card.no-event {
+	pointer-events: none;
+	opacity: 0.9;
+}
 
                   /*----- Styling Sozial Media footerbereich -----
                     ------------------------------------------------*/
