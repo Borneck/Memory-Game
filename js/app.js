@@ -50,6 +50,14 @@ const deck =document.querySelector('.deck');
 const card = document.querySelectorAll('.card');
 const decke = document.querySelector('#play-deck');
 const restart = document.querySelector('.restart');
+const time = document.querySelector(".time");
+
+const move = document.querySelector('.moves');
+let count = 0;
+
+let second = 0, minute = 0;
+let interval;
+let timeControl = true;
                         /****** Klassen namen in Array Speichern ******/
 let cards = [...card];
 let cardOneTwo = [];
@@ -112,18 +120,20 @@ function cardDisplay(){
     cardList = this.classList;
     cardOneTwo.push(this.children[0].classList[1]);
     cardArray.push(this);
-      
-    openCards()                                     
+     
+    openCards()
+    if(timeControl == true){startTimer();} 
     twoCardsOpen();
     checkCards();
-    
+
     return cardList;
 };
                         /****** Funktion um Spiel Karten zu öffnen ******/
 function openCards(){
     cardList.toggle('open');
     cardList.toggle('show');
-    cardList.toggle('no-event'); 
+    cardList.toggle('no-event');
+    
 };
                         /****** Funktion um zwei Spielkarten zu öffnen ******/
 function twoCardsOpen(){
@@ -139,6 +149,7 @@ function checkCards(){
         
     if (cardOne === undefined ||  cardTwo === undefined ){} 
     else if (cardOne === cardTwo ) {
+        moveCounter();
         cardArray[0].classList.add('match', 'no-event');
         cardArray[1].classList.add('match', 'no-event');
         cardOneTwo=[];
@@ -146,26 +157,75 @@ function checkCards(){
     }
     else {
         if(cardArray.length === 2){
+            moveCounter();
             setTimeout(function(){
                 cardArray[0].classList.remove('open', 'show', 'no-event');
                 cardArray[1].classList.remove('open', 'show', 'no-event');
+                
                 cardOneTwo= [];
                 cardArray=[];
             }, 1500); 
         }; 
     };
 };
-                     /****** Funktion um das Spiele Neu zu starten ******/
+                        /****** Funktion um die Versuche zu zählen ******/
+
+function moveCounter(){
+    count++;
+    move.innerText = count;
+}
+                        /****** Funktion Move nach restart zurückstetztn ******/
+function resetMove() {
+    count = 0;
+    move.innerText = '';
+}
+                        /***** Funktion für den Zeitzähler zu starten ******/
+function startTimer(){
+    timeControl = false;
+    interval = setInterval(function(){
+        
+        time.innerText = `${minute} min ${second} sec`;
+        second++;
+        if(second == 60){
+            minute++;
+            second=0;
+        }
+    },1000);
+}
+                        /****** Funktion um Zeit zu Stoppen ******/
+function timerStop() {
+    clearInterval(interval);
+}
+                        /****** Funtkion Timer nach restart zurückzusetzten ******/
+function resetTimer() {
+    timerStop();
+    second = 0;
+    minute = 0;
+    time.innerText = '';
+    
+    timeControl =true;
+}
+                        /****** Funktion um das Spiele Neu zu starten ******/
 function gameReset(){
     restart.addEventListener('click',function(){        
             restart.classList.remove("show");
-        startGame();        
+        
+        resetTimer();
+        startGame();
+        resetMove();
+        cardOneTwo= [];
+        cardArray= [];
     });
 };
 
+
 /*************************************** Ende Memory Spiel*******************************************************/
-                        
-   
+
+
+
+
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
