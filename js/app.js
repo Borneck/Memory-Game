@@ -149,9 +149,10 @@ function checkCards(){
         
     if (cardOne === undefined ||  cardTwo === undefined ){} 
     else if (cardOne === cardTwo ) {
-        moveCounter();
         cardArray[0].classList.add('match', 'no-event');
         cardArray[1].classList.add('match', 'no-event');
+        
+        moveCounter();
         cardOneTwo=[];
         cardArray= [];
     }
@@ -172,7 +173,12 @@ function checkCards(){
 
 function moveCounter(){
     count++;
-    move.innerText = count;
+    if(count <= 1){
+        move.innerText = `${count}. Move`;
+    } else {
+        move.innerText = `${count}. Moves `;
+    }
+    
 }
                         /****** Funktion Move nach restart zurückstetztn ******/
 function resetMove() {
@@ -209,7 +215,6 @@ function resetTimer() {
 function gameReset(){
     restart.addEventListener('click',function(){        
             restart.classList.remove("show");
-        
         resetTimer();
         startGame();
         resetMove();
@@ -220,9 +225,32 @@ function gameReset(){
 
 
 /*************************************** Ende Memory Spiel*******************************************************/
+const stars = document.querySelectorAll(".fa-star");
+let starsList = document.querySelectorAll(".stars li");
+
+/*
+    for (var i= 0; i < stars.length; i++){
+        stars[i].style.color = "#FFD700";
+        stars[i].style.visibility = "visible";
+    }
 
 
-
+  /**
+    if (moves > 8 && moves < 12){
+        for( i= 0; i < 3; i++){
+            if(i > 1){
+                stars[i].style.visibility = "collapse";
+            }
+        }
+    }
+    else if (moves > 13){
+        for( i= 0; i < 3; i++){
+            if(i > 0){
+                stars[i].style.visibility = "collapse";
+            }
+        }
+    }
+}
 
 
 

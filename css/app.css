@@ -251,6 +251,14 @@ i.fa-repeat {
     margin: auto;
 }
 
+                    /*----- Styling Züge -----
+                    ------------------------*/
+.move-style {
+    min-height: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+}
+
                    /*----- Styling punkte -----
                     -------------------------*/
 
@@ -272,6 +280,7 @@ i.fa-repeat {
     list-style: none;
     display: inline-block;
 }
+
 
 .score-panel .restart {
     float: right;
