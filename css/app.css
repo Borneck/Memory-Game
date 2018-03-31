@@ -257,6 +257,8 @@ i.fa-repeat {
 .score-panel {
     text-align: left;
     margin-bottom: 10px;
+    min-width: 30%;
+    text-align: center;
 }
 
 .score-panel .stars {
