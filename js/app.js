@@ -51,10 +51,11 @@ const card = document.querySelectorAll('.card');
 const decke = document.querySelector('#play-deck');
 const restart = document.querySelector('.restart');
 const time = document.querySelector(".time");
-
 const move = document.querySelector('.moves');
-let count = 0;
+const stars = document.querySelectorAll(".fa-star");
 
+let starsList = document.querySelectorAll(".stars li");
+let count = 0;
 let second = 0, minute = 0;
 let interval;
 let timeControl = true;
@@ -62,6 +63,7 @@ let timeControl = true;
 let cards = [...card];
 let cardOneTwo = [];
 let cardArray = [];
+let moveArray = [];
                         /****** Variabeln für Speicherplatz ******/
 let cardOne;
 let cardTwo;
@@ -125,8 +127,6 @@ function cardDisplay(){
     if(timeControl == true){startTimer();} 
     twoCardsOpen();
     checkCards();
-
-    return cardList;
 };
                         /****** Funktion um Spiel Karten zu öffnen ******/
 function openCards(){
@@ -152,23 +152,59 @@ function checkCards(){
         cardArray[0].classList.add('match', 'no-event');
         cardArray[1].classList.add('match', 'no-event');
         
-        moveCounter();
         cardOneTwo=[];
         cardArray= [];
+        moveCounter();
     }
     else {
         if(cardArray.length === 2){
             moveCounter();
+            starsPonits();
+            
             setTimeout(function(){
                 cardArray[0].classList.remove('open', 'show', 'no-event');
                 cardArray[1].classList.remove('open', 'show', 'no-event');
                 
                 cardOneTwo= [];
                 cardArray=[];
+               
             }, 1500); 
         }; 
     };
 };
+                        /****** Funktion für die Sterne Bewertung ******/
+function starsPonits() {
+    for (var i= 0; i < stars.length; i++){}
+    if (moveArray.length > 8 && moveArray.length <= 10){
+        for( i= 0; i < 3; i++){
+            if(i > 1){
+                stars[i].classList.add('stars-down-half');
+                stars[i].classList.remove('stars-start');
+            }
+        }
+    } else if (moveArray.length > 10 && moveArray.length <=14){
+        for( i= 0; i < 3; i++){
+            if(i > 1){
+                stars[i].classList.add('stars-down');
+                stars[i].classList.remove('stars-down-half');
+            }
+        } 
+    } else if (moveArray.length > 14 && moveArray.length <= 16){
+        for( i= 0; i < 3; i++){
+            if(i > 0){
+                stars[i].classList.add('stars-down-half');
+                stars[i].classList.remove('stars-start');
+            }
+        } 
+    } else if (moveArray.length > 20){
+        for( i= 0; i < 3; i++){
+            if(i > 0){
+                stars[i].classList.add('stars-down');
+                stars[i].classList.remove('stars-down-half');
+            }
+        } 
+    }
+}
                         /****** Funktion um die Versuche zu zählen ******/
 
 function moveCounter(){
@@ -177,7 +213,8 @@ function moveCounter(){
         move.innerText = `${count}. Move`;
     } else {
         move.innerText = `${count}. Moves `;
-    }
+    } 
+    return moveArray.push(count);
     
 }
                         /****** Funktion Move nach restart zurückstetztn ******/
@@ -214,45 +251,18 @@ function resetTimer() {
                         /****** Funktion um das Spiele Neu zu starten ******/
 function gameReset(){
     restart.addEventListener('click',function(){        
-            restart.classList.remove("show");
+        restart.classList.remove("show");
         resetTimer();
         startGame();
         resetMove();
         cardOneTwo= [];
         cardArray= [];
+        moveArray = [];
     });
 };
-
+ console.log(moveArray)
 
 /*************************************** Ende Memory Spiel*******************************************************/
-const stars = document.querySelectorAll(".fa-star");
-let starsList = document.querySelectorAll(".stars li");
-
-/*
-    for (var i= 0; i < stars.length; i++){
-        stars[i].style.color = "#FFD700";
-        stars[i].style.visibility = "visible";
-    }
-
-
-  /**
-    if (moves > 8 && moves < 12){
-        for( i= 0; i < 3; i++){
-            if(i > 1){
-                stars[i].style.visibility = "collapse";
-            }
-        }
-    }
-    else if (moves > 13){
-        for( i= 0; i < 3; i++){
-            if(i > 0){
-                stars[i].style.visibility = "collapse";
-            }
-        }
-    }
-}
-
-
 
 /*
  * set up the event listener for a card. If a card is clicked:

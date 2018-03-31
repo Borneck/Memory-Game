@@ -281,6 +281,23 @@ i.fa-repeat {
     display: inline-block;
 }
 
+.score-panel .stars li i {
+    color: rgb(255, 215, 0);
+    font-size: 180%;
+}
+
+.score-panel .stars li i.stars-start {
+    visibility: visible;
+}
+
+.stars-down-half {
+    font-size: 280%;
+    opacity: 0.5;
+}
+
+.stars-down {
+    visibility: collapse;
+}
 
 .score-panel .restart {
     float: right;
