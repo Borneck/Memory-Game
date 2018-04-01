@@ -195,7 +195,7 @@ function starsPonits() {
             }
         } 
     } else if (moveArray.length > 14 && moveArray.length <= 16){
-        for( i= 0; i < 3; i++){
+        for(let i= 0; i < 3; i++){
             if(i > 0){
                 stars[i].classList.add('stars-down-half');
                 stars[i].classList.remove('stars-start');
