@@ -64,10 +64,12 @@ let cards = [...card];
 let cardOneTwo = [];
 let cardArray = [];
 let moveArray = [];
+let matchArray = [];
                         /****** Variabeln für Speicherplatz ******/
 let cardOne;
 let cardTwo;
 let cardList;
+let points;
                         /****** Spiel Starten ******/
 document.body.onload = startGame();
                         /****** Spielkarten neu Mischen ******/
@@ -107,7 +109,7 @@ function startGame(){
 function cardsShuffle(){
     cards = shuffle(cards);
 };
-                        /****** Funktion um Klassen bei Start zu löschen *****/
+                        /****** Funktion um Klassen bei Start bei den Spielkarten zu löschen *****/
 function cardsRemove() {
     for (var i = 0; i < cards.length; i++){
         deck.innerHTML = '';
@@ -151,10 +153,13 @@ function checkCards(){
     else if (cardOne === cardTwo ) {
         cardArray[0].classList.add('match', 'no-event');
         cardArray[1].classList.add('match', 'no-event');
-        
+        matchArray.push(cardArray);
         cardOneTwo=[];
         cardArray= [];
         moveCounter();
+        matchEnd();
+        console.log(matchArray)
+        return matchArray;
     }
     else {
         if(cardArray.length === 2){
@@ -174,16 +179,16 @@ function checkCards(){
 };
                         /****** Funktion für die Sterne Bewertung ******/
 function starsPonits() {
-    for (var i= 0; i < stars.length; i++){}
+    for (let i= 0; i < stars.length; i++){}
     if (moveArray.length > 8 && moveArray.length <= 10){
-        for( i= 0; i < 3; i++){
+        for(let i= 0; i < 3; i++){
             if(i > 1){
                 stars[i].classList.add('stars-down-half');
                 stars[i].classList.remove('stars-start');
             }
         }
     } else if (moveArray.length > 10 && moveArray.length <=14){
-        for( i= 0; i < 3; i++){
+        for(let i= 0; i < 3; i++){
             if(i > 1){
                 stars[i].classList.add('stars-down');
                 stars[i].classList.remove('stars-down-half');
@@ -197,12 +202,19 @@ function starsPonits() {
             }
         } 
     } else if (moveArray.length > 20){
-        for( i= 0; i < 3; i++){
+        for(let i= 0; i < 3; i++){
             if(i > 0){
                 stars[i].classList.add('stars-down');
                 stars[i].classList.remove('stars-down-half');
             }
         } 
+    }
+}
+
+function resetStars(){
+    for (let i= 0; i < stars.length; i++){
+        stars[i].classList.add('stars-start');
+        stars[i].classList.remove('stars-down', 'stars-down-half');
     }
 }
                         /****** Funktion um die Versuche zu zählen ******/
@@ -235,6 +247,7 @@ function startTimer(){
         }
     },1000);
 }
+
                         /****** Funktion um Zeit zu Stoppen ******/
 function timerStop() {
     clearInterval(interval);
@@ -248,6 +261,63 @@ function resetTimer() {
     
     timeControl =true;
 }
+                        /***** Funtkion um Punkte zu ermitteln *****/
+function pointsCalculator(){
+    let time = (minute*60) + second;
+
+    if(time <= 60 && count < 10) {
+        return points = 600;
+    } else if(time <= 60 && count < 15) {
+        return points = 400; 
+    } else if(time <= 60 && count >15) {
+        return points = 200;
+    } else if(time > 60 && time < 90){
+        if(count < 10){
+            return points = 500;
+        } else if(count < 15){
+            return points = 300;
+        } else if(count > 15){
+            return points = 100;
+        }
+    } else if(time > 90 && time < 150){
+        if(count < 10){
+            return points = 400;
+        } else if(count <15){
+            return points = 200;
+        } else if(count > 15){
+            return points = 100;
+        } 
+    } else if(time > 150){
+        if(count < 10){
+            return points = 300;
+        } else if (count < 15){
+            return points = 150;
+        } else if(count < 15){
+            return points= 50;
+        }
+    } else {
+        return points = 0;
+    }
+    
+}
+                        /***** Funtkion wenn alle Karten richtig sind *****/
+ function matchEnd() {
+     
+    if(matchArray.length == 8) {
+        timerStop();
+        pointsCalculator();
+        
+        let result =`   Congratulations all cards correctly !!!!!!
+
+                    You have used ${count}: moves
+                    You time ${minute} minutes and ${second} seconds
+                    Total score: ${points} points`;
+        
+        sessionStorage.setItem('end', result);
+        let dataSave = sessionStorage.getItem('end')
+        alert(dataSave);
+    } 
+}
                         /****** Funktion um das Spiele Neu zu starten ******/
 function gameReset(){
     restart.addEventListener('click',function(){        
@@ -255,12 +325,14 @@ function gameReset(){
         resetTimer();
         startGame();
         resetMove();
+        resetStars();
+        matchArray = [];
         cardOneTwo= [];
         cardArray= [];
         moveArray = [];
+        
     });
 };
- console.log(moveArray)
 
 /*************************************** Ende Memory Spiel*******************************************************/
 
