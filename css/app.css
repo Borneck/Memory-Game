@@ -322,12 +322,20 @@ i.fa-repeat {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    transition: all .6s ease; 
 }
 
+
 .deck .card.open {
-    transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
+    animation: card 0.5s linear;
+}
+
+@keyframes card{
+    from{  transform: rotateY(180deg)   }
+    to  {  transform: rotateY(360deg) }
+    
 }
 
 .deck .card.show {
@@ -338,6 +346,12 @@ i.fa-repeat {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    transform:scale(1.1);
+    animation: card1 1s linear;  
+}
+@keyframes card1{
+    from{  transform: rotateY(0deg)   }
+    to  {  transform: rotateY(360deg) }
 }
 .deck .card.no-event {
 	pointer-events: none;
